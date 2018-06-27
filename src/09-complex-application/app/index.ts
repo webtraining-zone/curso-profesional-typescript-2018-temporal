@@ -1,14 +1,10 @@
-import {SignalsService} from "./services/signals-service";
+import {SignalsCardsComponent} from "./components/signals-cards/signals-cards.component";
+
 
 class App {
     start() {
         console.log('>> Start()!');
-
-        const service: SignalsService = new SignalsService();
-
-        service.getSignals().then(response => {
-            console.warn(response.data);
-        })
+        new SignalsCardsComponent().render();
     }
 }
 

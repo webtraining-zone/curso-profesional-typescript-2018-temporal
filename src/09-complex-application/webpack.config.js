@@ -1,3 +1,4 @@
+// Based on example in: https://www.typescriptlang.org/docs/handbook/react-&-webpack.html
 module.exports = {
   entry: './app/index.ts',
   output: {
@@ -12,7 +13,10 @@ module.exports = {
 
   resolve: {
     // Add '.ts' and '.tsx' as resolvable extensions.
-    extensions: ['.ts', '.tsx', '.js', '.json']
+    extensions: ['.ts', '.tsx', '.js', '.json'],
+    // alias: {
+    // template: __dirname + '/app/templates'
+    // }
   },
 
   module: {
@@ -21,7 +25,8 @@ module.exports = {
       {test: /\.tsx?$/, loader: 'awesome-typescript-loader'},
 
       // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
-      {enforce: 'pre', test: /\.js$/, loader: 'source-map-loader'}
+      {enforce: 'pre', test: /\.js$/, loader: 'source-map-loader'},
+      {test: /\.hbs/, loader: 'handlebars-loader'}
     ]
   },
 
@@ -31,5 +36,4 @@ module.exports = {
   // dependencies, which allows browsers to cache those libraries between builds.
   externals: {},
   mode: 'production'
-
 }
