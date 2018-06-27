@@ -5,7 +5,9 @@ import {RenderedComponent} from "../../core/components/rendered.component";
 import {BaseComponent} from "../../core/components/base.component";
 import {ConstructorComponentOptions} from "../../core/options/constructor-component-options";
 
-// import * as template from "./signals-cards.component.hbs";
+import * as template from "./signals-cards.component.hbs";
+import {ApiConfig} from "../../config/api-config";
+import {StringUtils} from "../../utils/string-utils";
 
 export class SignalsCardsComponent extends BaseComponent implements RenderedComponent {
     signals: Array<Signal> = [];
@@ -17,10 +19,10 @@ export class SignalsCardsComponent extends BaseComponent implements RenderedComp
 
     render() {
 
-        const template = require("./signals-cards.component.hbs");
+        // const template = require("./signals-cards.component.hbs");
 
         this._signalsService.getSignals().then(response => {
-            this.signals = response.data.signals;
+            this.signals = this.transformSignalsData(response.data.signals);
             this.signalTypes = this.extractSignalTypes(response.data.signals);
 
             this.applyRenderFromParentComponent(template, this.signals, this.signalTypes)
@@ -37,6 +39,20 @@ export class SignalsCardsComponent extends BaseComponent implements RenderedComp
             template: template
         });
     }
+
+    transformSignalsData(signals: Array<Signal>) {
+        return signals.map(signal => {
+            return {
+                filename: signal.filename,
+                imageURL: `${ApiConfig.BASE_URL}/traffic-signals-images/sct/${signal.filename}`,
+                name: signal.name,
+                description: signal.description,
+                summary: StringUtils.cutString(signal.description),
+                type: signal.type
+            };
+        });
+    }
+
 
     extractSignalTypes(signals: Array<Signal>): any {
         return [];

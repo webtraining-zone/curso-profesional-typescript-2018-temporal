@@ -9,7 +9,7 @@ export class BaseComponent {
     }
 
     render(options: RenderOptions) {
-        if (this.selector) {
+        if (this.selector) { // $('.container'), #app
             const $element = document.querySelector(this.selector); // $('#app');
             $element.innerHTML = options.template(options.data);
         }
