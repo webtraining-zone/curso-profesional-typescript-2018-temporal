@@ -4,7 +4,9 @@ import {SignalsCardsComponent} from "./components/signals-cards/signals-cards.co
 class App {
     start() {
         console.log('>> Start()!');
-        new SignalsCardsComponent().render();
+        new SignalsCardsComponent({
+            selector: '#signals-container'
+        }).render();
     }
 }
 

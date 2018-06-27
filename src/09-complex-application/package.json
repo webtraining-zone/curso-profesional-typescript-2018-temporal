@@ -19,6 +19,7 @@
     "webpack-command": "^0.3.0"
   },
   "dependencies": {
+    "@types/handlebars": "^4.0.38",
     "axios": "^0.18.0",
     "handlebars": "^4.0.11"
   }
